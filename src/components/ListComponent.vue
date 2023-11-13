@@ -1,7 +1,7 @@
 <template>
     <div>
-        <div v-bind:key="todo.id" v-for="todo in copyToDos" >
-            <ListItemComponent v-bind:todo="todo"/>
+        <div v-bind:key="todo_prop.id" v-for="todo_prop in copyToDos" >
+            <ListItemComponent v-bind:todo_prop="todo_prop" v-on:delete-todo="$emit('delete-todo',todo_prop.id)" />
 
         </div>
     </div>

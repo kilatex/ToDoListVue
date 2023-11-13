@@ -8,7 +8,7 @@
             <h1>To Do list with VueJs</h1>
 
             <AddToDoComponent />
-            <ListComponent v-bind:copyToDos="copyToDos"/>
+            <ListComponent v-bind:copyToDos="copyToDos" v-on:delete-todo="deleteTodo"/>
         </div>
 
 
@@ -53,7 +53,13 @@ export default {
     },
     created() {
             this.copyToDos = [... this.toDos]
-    }
+    },
+    methods: {
+        deleteTodo(id){
+            this.toDos = this.toDos.filter(todo => todo.id != id);
+            this.copyToDos = [... this.toDos];
+        }
+    },
 }
 </script>
 
