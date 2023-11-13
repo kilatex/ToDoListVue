@@ -1,9 +1,16 @@
 <template>
     <div>
-        <h1>To Do list with VueJs</h1>
-        <SearchComponent/> 
-        <AddToDoComponent/>
-        <ListComponent/>
+        <div class="header" id="header">
+            <SearchComponent />
+
+        </div>
+        <div class="container" id="container">
+            <h1>To Do list with VueJs</h1>
+
+            <AddToDoComponent />
+            <ListComponent v-bind:copyToDos="copyToDos"/>
+        </div>
+
 
     </div>
 </template>
@@ -17,11 +24,59 @@ export default {
     name: 'HomePage',
     components: {
         AddToDoComponent, ListComponent, SearchComponent
+    },
+    data() {
+        return {
+            toDos: [
+                {
+                    id:0,
+                    title: 'Comprar la cena',
+                    completed: false
+                },
+                {
+                    id:1,
+                    title: 'Contestar emails',
+                    completed: true
+                },
+                {
+                    id:2,
+                    title: 'Jugar Fútbol',
+                    completed: false
+                }
+            ],
+            copyToDos:[],
+           
+        }
+
+     
+        
+    },
+    created() {
+            this.copyToDos = [... this.toDos]
     }
 }
 </script>
 
 <style scoped>
-
-
+    *{
+        box-sizing: border-box;
+    }
+    body{
+        font-family: Arial, Helvetica sans-serif;
+        font-size: 1.5em;
+        padding: 0;
+        margin: 0;
+    }
+    .container{
+        border: solid 1px #ccc;
+        width: 600px;
+        margin: 100px auto;
+    }
+    .header{
+        background: black;
+        padding: 10px;
+    }
+    h1{
+        padding: 0 10px;
+    }
 </style>
