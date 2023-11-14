@@ -1,13 +1,13 @@
 <template>
     <div>
         <div class="header" id="header">
-            <SearchComponent />
+            <SearchComponent v-on:query-change="querySearch"/>
 
         </div>
         <div class="container" id="container">
             <h1>To Do list with VueJs</h1>
 
-            <AddToDoComponent />
+            <AddToDoComponent v-on:add-todo="addToDo"/>
             <ListComponent v-bind:copyToDos="copyToDos" v-on:delete-todo="deleteTodo"/>
         </div>
 
@@ -58,6 +58,20 @@ export default {
         deleteTodo(id){
             this.toDos = this.toDos.filter(todo => todo.id != id);
             this.copyToDos = [... this.toDos];
+        },
+        addToDo(todo){
+            this.toDos.push(todo);
+            this.copyToDos = [...this.toDos]
+        },
+        querySearch(query){
+            if(query.trim() === ''){
+                this.copyToDos = [...this.toDos];
+            }else{
+                const temp = this.toDos.filter(toDos => {
+                    return toDos.title.includes(query)
+                });
+                this.copyToDos = [...temp];
+            }
         }
     },
 }
